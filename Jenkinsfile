@@ -6,9 +6,9 @@ pipeline {
 }
     stage ('BUILD') {
       steps {
-        echo "To install package $(params.Select_Package)"
+	      echo "To install package ${params.Select_Package}"
         sh '''
-	sudo apt install "${select_Package}"
+	sudo apt install $select_Package
 	'''
       }  
     }  
