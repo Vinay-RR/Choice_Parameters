@@ -8,7 +8,7 @@ pipeline {
       steps {
         echo "To install package $(params.Select_Package)"
         sh '''
-	sudo apt install ${select_Package}
+	sudo apt install "${select_Package}"
 	'''
       }  
     }  
