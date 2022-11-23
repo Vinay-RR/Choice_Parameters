@@ -1,34 +1,16 @@
 pipeline {
   agent any	
   stages {
+	  parameters {
+  choice choices: ['git', 'tree', 'vim', 'gcc', 'make'], description: 'To install package in Ubuntu Machine', name: 'Select_Package'
+}
     stage ('BUILD') {
       steps {
-        echo "This is Build stage"
-        sh 'sleep 5;'
+        echo "To install package $(params.Select_Package)"
+        sh '''
+	sudo apt install $select_Package
+	'''
       }  
     }  
-      stage ('TEST PARALLEL') {
-	   parallel {
-	   stage ('TEST ON CHROME') {
-      steps {
-        echo "This is Test on chrome browser"
-        sh 'sleep 5;'
-      }  
-    }  
-	   
-    stage ('TEST ON SAFARI') {
-      steps {
-        echo "This is Test on Safari browser"
-        sh 'sleep 5;'
-      }  
-    }  
-  } 
-}
-	  stage('DEPLOY') {
-		  steps {
-			  echo 'This is Deploy stage'
-			  sh 'sleep 5'
-		  }
-	  }
-  }
+        }
 }
